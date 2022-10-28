@@ -40,6 +40,6 @@ public class ImageServiceImpl{
     public String getFullPath(Integer imageId) {
         Image image = imageRepository.findById(imageId).orElseThrow();
         log.info(image.getStored_file_path());
-        return fileDir + image.getStored_file_path();
+        return image.getStored_file_path();
     }
 }

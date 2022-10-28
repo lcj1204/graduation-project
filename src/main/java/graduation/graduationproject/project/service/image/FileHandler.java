@@ -35,7 +35,7 @@ public class FileHandler {
         String current_date = simpleDateFormat.format(new Date());
 
         // 프로젝트 폴더에 저장하기 위해 절대경로를 설정 ?
-        String absolutePath = new File("").getAbsolutePath() + "/";
+        String absolutePath = new File("").getAbsolutePath()+"/";
 
         // 경로를 지정하고 그곳에다가 저장
         String path = "images/" + current_date;
@@ -73,7 +73,7 @@ public class FileHandler {
                     originalFileExtension = ".heic";
                 }
                 else{
-                    System.out.printf("지원하지 않는 확장자 명이다");
+                    System.out.println("지원하지 않는 확장자 명이다");
                     return image;
                 }
             }
@@ -82,13 +82,17 @@ public class FileHandler {
             // 생성
             image = Image.builder()
                     .original_file_name(multipartFile.getOriginalFilename())
-                    .stored_file_path(path + "/" + new_file_name)
+                    .stored_file_path(absolutePath+path + "/" + new_file_name)
                     .file_size(multipartFile.getSize())
                     .file_content_type(multipartFile.getContentType())
                     .build();
 
             //저장된 파일로 변경하여 이를 보여주기 위함.
-            file = new File(absolutePath + path + "/" + new_file_name);
+            file = new File( absolutePath + path + "/" + new_file_name);
+
+//            System.out.println(file1.getAbsoluteFile());
+
+//            File file1 = new File(absolutePath + path + "/" + new_file_name);
             multipartFile.transferTo(file);
         }
 
